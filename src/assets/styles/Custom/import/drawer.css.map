@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAIgB,yBAJS,CACrB,2BAA2B,CACvB,mBAAmB,CACf,wBAAwB,CACpB,gBAAgB,CAAA;EACZ,OAAO,EAAE,kBAAkB;CAC9B",
+    "sources": [
+        "drawer.scss"
+    ],
+    "names": [],
+    "file": "drawer.css"
+}

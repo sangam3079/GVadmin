@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+  pre_build:
+    commands:
+      - echo Install source NPM dependencies.....
+      - yarn
+  build:
+    commands:
+      - echo Build started on `date`
+      - yarn deploy-staging
+  post_build:
+    commands:
+      # copy the contents of /build to S3
+      # set the cache-control headers for service-worker.js to prevent

@@ -1,0 +1,21 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+  pre_build:
+    commands:
+      - echo Install source NPM dependencies.....
+      - rm -rf node_modules
+      - yarn
+      - rm -rf package-lock.json yarn.lock
+      - yarn
+  build:
+    commands:
+      - echo Build started on `date`
+      - yarn deploy
+  post_build:
+    commands:
+      # copy the contents of /build to S3
+      # - aws s3 cp --recursive build/. s3://admin-goodvibesoffical --cache-control max-age=0,no-cache,no-store,must-revalidate --metadata 'ACL=public-read-write'
+      # set the cache-control headers for service-worker.js to prevent
