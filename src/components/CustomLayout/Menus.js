@@ -160,6 +160,7 @@ const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
               <span>Tracks</span>
             </Link>
           </Menu.Item>
+          {/*
           <Menu.Item key='composers'>
             <Link to='/composers'>
               <FormOutlined
@@ -168,6 +169,7 @@ const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
               <span>Composers</span>
             </Link>
           </Menu.Item>
+          */}
           <Menu.Item
             key='category'
             onClick={() => {
@@ -224,6 +226,7 @@ const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
               <span>Playlists</span>
             </Link>
           </Menu.Item>
+          {/*
           <Menu.Item
             key='rituals'
             onClick={() => {
@@ -238,6 +241,7 @@ const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
               <span>Rituals</span>
             </Link>
           </Menu.Item>
+          */}
           <Menu.Item
             key='subscriptions'
             onClick={() => {

@@ -105,6 +105,7 @@ export const CUSTOMERS = {
   EDIT: `${CUSTOMER_PATH}/:id/edit`,
 };
 
+{/*
 const COMPOSER_PATH = '/composers';
 export const COMPOSERS = {
   INDEX: COMPOSER_PATH,
@@ -112,6 +113,7 @@ export const COMPOSERS = {
   VIEW: `${COMPOSER_PATH}/:id`,
   EDIT: `${COMPOSER_PATH}/:id/edit`,
 };
+*/}
 
 const PROMO = '/promos';
 export const PROMOS = {

@@ -12,7 +12,7 @@ import '../../global.scss';
 import {
   DASHBOARD,
   CUSTOMERS,
-  COMPOSERS,
+ // COMPOSERS,
   EMAIL_MARKETINGS,
   TRACKS,
   CATEGORIES,
@@ -36,7 +36,7 @@ import {
 
 import Dashboard from '../../components/Dashboard';
 import Customers from '../../components/Customers/Customers';
-import Composers from '../../components/Composers/Composers';
+//import Composers from '../../components/Composers/Composers';
 import EmailMarketings from '../../components/EmailMarketings';
 import Tracks from '../../components/Tracks/Tracks';
 import Categories from '../../components/Categories/Categories';
@@ -57,7 +57,7 @@ import Redemptions from '../Redemptions/Redemptions';
 import Invitation from '../../components/Invitations/Invitations';
 
 import CustomerForm from '../Customers/Form';
-import ComposerForm from '../Composers/Form';
+//import ComposerForm from '../Composers/Form';
 import PromoCodeForm from '../PromoCodes/Form';
 import TrackForm from '../Tracks/Form';
 import GenreForm from '../Genres/Form';
@@ -92,8 +92,8 @@ function App({ history }) {
         <PrivateRoute exact path={CUSTOMERS.EDIT} component={CustomerForm} />
         <PrivateRoute exact path={PROMO_CODE.NEW} component={PromoCodeForm} />
         <PrivateRoute exact path={PROMO_CODE.EDIT} component={PromoCodeForm} />
-        <PrivateRoute exact path={COMPOSERS.NEW} component={ComposerForm} />
-        <PrivateRoute exact path={COMPOSERS.EDIT} component={ComposerForm} />
+        {/*<PrivateRoute exact path={COMPOSERS.NEW} component={ComposerForm} /> 
+        <PrivateRoute exact path={COMPOSERS.EDIT} component={ComposerForm} /> */}
         <PrivateRoute exact path={TRACKS.NEW} component={TrackForm} />
         <PrivateRoute exact path={TRACKS.EDIT} component={TrackForm} />
         <PrivateRoute exact path={CATEGORIES.NEW} component={CategoryForm} />
@@ -133,7 +133,7 @@ function App({ history }) {
 
         <PrivateRoute path={DASHBOARD} component={Dashboard} />
         <PrivateRoute path={CUSTOMERS.INDEX} component={Customers} />
-        <PrivateRoute path={COMPOSERS.INDEX} component={Composers} />
+        {/*<PrivateRoute path={COMPOSERS.INDEX} component={Composers} /> */}
         <PrivateRoute path={PROMOS.INDEX} component={Promos} />
         <PrivateRoute path={PROMO_CODE.INDEX} component={PromoCode} />
         <PrivateRoute path={REDEMPTIONS.INDEX} component={Redemptions} />

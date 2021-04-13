@@ -23,8 +23,9 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
     let [dateFilter, setDateFilter] = useState();
     let [sort, setSort] = useState()
     let [filter, setFilter] = useState()
-    const [showDrawer, setShowDrawer] = useState(false)
+    const [showModal, setShowModal] = useState(false)
     const [selectedCustomer,setSelectedCustomer] =useState({})
+    
     // let [currentPage, setCurrentPage] = useState(1);
     
     const deleteUser = (id) => {
@@ -45,14 +46,18 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
         history.push(`/customers/${id}/edit`);
     }
 
-    const onOpenDrawer = (record) => {
+    
+
+    
+
+    const onOpenModal = (record) => {
         console.log(record);
         setSelectedCustomer(record);
-        setShowDrawer(true);
+        setShowModal(true);
     }
     
-    const onCloseDrawer = () => {
-        setShowDrawer(false);
+    const onCloseModal = () => {
+        setShowModal(false);
         setSelectedCustomer({selectedCustomer : undefined});
     }
     
@@ -210,7 +215,7 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
                     </Can>
                     <Divider type="vertical" />
                         <IdcardOutlined 
-                            onClick={ ()=>onOpenDrawer(record)  } 
+                            onClick={ ()=>onOpenModal(record)  } 
                             style={{color : '#1890ff'}}
                         />
                        
@@ -347,18 +352,20 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
                                 onChange={handleTableChange}
                                 loading={fetching}
                             />
-                            <Drawer
+                            <Modal
                                 title="Customer Information"
-                                placement="right"
                                 closable={true}
-                                onClose={onCloseDrawer}
-                                visible={showDrawer}
-                                width={520}
+                                onCancel={onCloseModal}
+                                visible={showModal}
+                                width={920}
+                                centered={true}
                                 destroyOnClose={true}
-                                className="drawer-body-padding-none"
+                                
+                                //className="drawer-body-padding-none"
+                                footer={false}
                             >
                                 <CustomerDetails  subject={selectedCustomer}/>
-                            </Drawer>
+                            </Modal>
                             <Button 
                                 type="primary" 
                                 icon={<DownloadOutlined/>} 
