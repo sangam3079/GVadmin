@@ -1,14 +1,13 @@
 import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
-
 import { UserContext } from 'contexts/UserContext'
-
 import MiniCustomers from '../Customers/MiniCustomers'
 import MiniTracks from '../Tracks/MiniTracks'
 import MiniLogs from '../Logs/MiniLogs'
 import CustomerChart from '../Chart/CustomerChart'
 import CustomLayout from '../../components/CustomLayout/CustomLayout'
 import InfoCard from '../../cleanComponents/ChartCard'
+import WidgetCard from '../../cleanComponents/widgets'
 // import BreadCrumb from 'cleanComponents/Breadcrumb/BreadCrumb'
 
 
@@ -32,7 +31,7 @@ const Dashboard = ({ history }) => {
 					<InfoCard title="Customer" amount={metrics.customers_count}/>
 				</div>
 				<div className="col-sm-3">
-					<InfoCard title="Subscriber" amount={metrics.subscribers_count}/>
+					<WidgetCard title="Subscriber" amount={metrics.subscribers_count}/>
 				</div>
 				<div className="col-sm-3">
 					<InfoCard title="Active User" amount={metrics.active_users_count}/>
