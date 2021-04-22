@@ -26,14 +26,19 @@ import {
 import { getSorterObject } from 'utils/helpers';
 import { customFetch } from 'utils';
 import cookie from 'utils/cookie';  
+import UserGroupsDetails from './UserGroupsDetails';
 
 const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyword,}) => {
 
+  const { confirm } = Modal;
   const [prevUserGroupsCampaignKeyword, setPrevUserGroupsCampaignKeyword] = useState(undefined);
   const [fetching, setFetching] = useState(false);
   const [loading, setLoading] = useState(true);
   const [dateFilter, setDateFilter] = useState({});
   const [sort, setSort] = useState();
+
+  const [showModal, setShowModal] = useState(false)
+  const [selectedUserGroups,setSelectedUserGroups] = useState({});
 
   const token = cookie.getToken();
 
@@ -97,6 +102,17 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
     fetchUserGroupsCampaign();
   }, [keyword, dateFilter, sort, currentPage]);
 
+  const onOpenModal = () => {
+    //console.log(record);
+    //setSelectedCustomer(record);
+    setShowModal(true);
+  }
+
+  const onCloseModal = () => {
+      setShowModal(false);
+      //setSelectedCustomer({selectedCustomer : undefined});
+  }
+
   
   const columns = [
     {
@@ -136,9 +152,26 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
           {users.map((user) => {
             return (
               <ul>
-                <li>{user.id}</li>
-                <li>{user.email}</li>
-                <li>{user.full_name}</li>
+                <div>
+                  User Id: 
+                  <Tag color='green' style={{borderRadius:5}}>
+                    {user.id}
+                  </Tag>
+                </div>
+                <div>
+                  Email : 
+                  <Tag color='pink' style={{borderRadius:7}}>
+                    {user.email}
+                  </Tag>
+                </div>
+                <div>
+                  Name : 
+                  <Tag color='purple' style={{borderRadius:7}}>
+                    {user.full_name}
+                  </Tag>
+                </div>
+                
+                
               </ul> 
             )
           })}
@@ -151,21 +184,21 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
       dataIndex: 'created_at',
       key: 'created_at',
     },
-    {
+    { /*
       title : 'User Details',
       
       render : () => {
           return (
             <div>
               <IdcardOutlined 
-                  //onClick={showModal}
+                  onClick={ ()=>onOpenModal()  } 
                   style={{color : '#1890ff'}}
               />
               
             </div>
           );
       }
-    }      
+    */}      
   ] 
 
 
@@ -205,6 +238,20 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
               loading={fetching}
               //scroll={{ x: 1320 }}
             />
+            <Modal
+              title="User Groups Campaign"
+              closable={true}
+              onCancel={onCloseModal}
+              visible={showModal}
+              width={920}
+              centered={true}
+              destroyOnClose={true}
+              
+              //className="drawer-body-padding-none"
+              footer={false}
+            >
+              <UserGroupsDetails userGroupsData={selectedUserGroups} />
+            </Modal>
            </div>
           
         </div>  
