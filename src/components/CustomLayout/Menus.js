@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Link } from 'react-router-dom';
 import logo from 'assets/images/goodvibes.jpg';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Dropdown } from 'antd';
 import styles from './style.module.scss';
 import { setCollapsed } from '../../store/actions/Sidebar/SidebarActions';
 import {
@@ -70,11 +70,53 @@ import {
   setSubscriptionKeyword,
 } from 'store/actions/Subscription/SubscriptionAction';
 
+import { DownOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+
+
+const { SubMenu } = Menu;
+
+// submenu keys of first level
+const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
+
+
+
 const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
   const { Sider } = Layout;
   const handleCollapse = () => {
     dispatch(setCollapsed(!collapsed));
   };
+
+  const analyticMenu = (
+    <Menu>
+      <Menu.Item key="0">
+        <Link to="/analytic-tracks">Tracks</Link>
+      </Menu.Item>
+      <Menu.Item key="1">
+        <Link to="/tags">customer</Link>
+      </Menu.Item>
+    </Menu>
+  );
+
+  const { SubMenu } = Menu;
+
+  // submenu keys of first level
+  const rootSubmenuKeys = ['campaign', 'usercampaign', ];
+
+  const [openKeys, setOpenKeys] = useState(['campaign']);
+
+  const onOpenChange = keys => {
+    const latestOpenKey = keys.find(key => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
+  
+  
+
+
   return (
     <Sider
       collapsible={!isMobileView ? true : false}
@@ -184,6 +226,9 @@ const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
               <span>Category</span>
             </Link>
           </Menu.Item>
+
+          
+
           <Menu.Item
             key='genres'
             onClick={() => {
@@ -278,6 +323,7 @@ const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
               <span>Push Notification</span>
             </Link>
           </Menu.Item> */}
+          {/*
           <Menu.Item
             key='campaign'
             onClick={() => {
@@ -291,7 +337,7 @@ const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
               />
               <span>Campaign</span>
             </Link>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item
             key='download'
             onClick={() => {
@@ -314,6 +360,46 @@ const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
               <span>Activity Logs</span>
             </Link>
           </Menu.Item>
+          {/*
+          <Menu.Item key='analytics'>
+              <Dropdown overlay={analyticMenu} trigger={['click']} placement="bottomRight" arrow>
+                <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                  Analytics <AccountBookOutlined className={`${styles.icon} icon-collapsed-hidden`}/>
+                </a>
+              </Dropdown>  
+          </Menu.Item> */}
+          <SubMenu key="campaign" title="Campaign">
+            <Menu.Item 
+              key="campaign"
+              onClick={() => {
+                dispatch(setCategoryCurrentpage(1));
+                dispatch(setCategoryKeyword(undefined));
+              }}
+            >
+              <Link to='/campaign'>
+                <BellOutlined
+                  className={`${styles.icon} icon-collapsed-hidden`}
+                />
+                <span>Campaign</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item 
+            /*
+              key="userCampaign"
+              
+              onClick={() => {
+                dispatch(setCategoryCurrentpage(1));
+                dispatch(setCategoryKeyword(undefined));
+              }} */
+            >
+              <Link to='/userCampaign'>
+                <BellOutlined
+                  className={`${styles.icon} icon-collapsed-hidden`}
+                />
+                <span>User Campaign</span>
+              </Link>
+            </Menu.Item>
+          </SubMenu>
         </Menu>
       </Scrollbars>
     </Sider>

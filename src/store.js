@@ -22,7 +22,7 @@ import PromoCodes from 'store/reducers/PromoCodesReducer';
 import Invitations from 'store/reducers/InvitationsReducer';
 import Redemptions from 'store/reducers/RedemptionsReducer';
 import ReduxThunk from 'redux-thunk';
-
+import UserGroupsCampaign from 'store/reducers/UserGroupsCampaignReducer';
 const rootReducer = combineReducers({
   form: formReducer,
   Sidebar,
@@ -46,6 +46,7 @@ const rootReducer = combineReducers({
   PromoCodes,
   Invitations,
   Redemptions,
+  UserGroupsCampaign,
 });
 
 const composeEnhancers =

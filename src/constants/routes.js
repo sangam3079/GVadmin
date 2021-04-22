@@ -148,3 +148,7 @@ export const LOGS = '/logs';
 export const SETTINGS = '/settings';
 
 export const SLIDER = '/slider';
+
+export const ANALYTICTRACKS = '/analytic-tracks';
+
+export const USERCAMPAIGN = '/userCampaign';

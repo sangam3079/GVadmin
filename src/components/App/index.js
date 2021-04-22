@@ -12,6 +12,7 @@ import '../../global.scss';
 import {
   DASHBOARD,
   CUSTOMERS,
+  ANALYTICTRACKS,
  // COMPOSERS,
   EMAIL_MARKETINGS,
   TRACKS,
@@ -32,9 +33,11 @@ import {
   PROMO_CODE,
   INVITATIONS,
   REDEMPTIONS,
+  USERCAMPAIGN,
 } from 'constants/routes';
 
 import Dashboard from '../../components/Dashboard';
+import AnalyticTracks from '../../components/AnalyticTracks';
 import Customers from '../../components/Customers/Customers';
 //import Composers from '../../components/Composers/Composers';
 import EmailMarketings from '../../components/EmailMarketings';
@@ -70,6 +73,8 @@ import CampaignForm from '../Campaign/Form';
 
 import TagForm from 'components/Tags/TagForm';
 import TagGroupForm from 'components/Tags/TagGroupForm';
+
+import UserCampaign from 'components/UserCampaign';
 
 function App({ history }) {
   return (
@@ -132,6 +137,7 @@ function App({ history }) {
         <PrivateRoute exact path={TAGS_GROUP.NEW} component={TagGroupForm} />
 
         <PrivateRoute path={DASHBOARD} component={Dashboard} />
+        
         <PrivateRoute path={CUSTOMERS.INDEX} component={Customers} />
         {/*<PrivateRoute path={COMPOSERS.INDEX} component={Composers} /> */}
         <PrivateRoute path={PROMOS.INDEX} component={Promos} />
@@ -153,8 +159,12 @@ function App({ history }) {
         <PrivateRoute path={RITUALS.INDEX} component={Ritual} />
         <PrivateRoute path={SLIDER} component={Slider} />
         <PrivateRoute path={SETTINGS} component={Settings} />
+        <PrivateRoute path={ANALYTICTRACKS} component={AnalyticTracks} />
+        <PrivateRoute path={USERCAMPAIGN} component={UserCampaign} />
         <PrivateRoute path={LOGS} component={Logs} />
         <PrivateRoute path={TAGS} component={Tags} />
+        
+        
       </Switch>
     </UserProvider>
   );

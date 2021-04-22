@@ -33,6 +33,7 @@ export const tagsGroupUrl = 'tag_groups';
 export const promoCodesUrl = 'promo_codes';
 export const redemptionsUrl = 'promo_code_redemptions';
 export const invitationsUrl = 'invitations';
+export const userGroupsCampaignUrl = 'user_groups'
 
 export let authToken = cookie.getToken();
 

@@ -1,0 +1,14 @@
+{
+    "labels": ["Android", "Iphone"],
+    "datasets": [
+      {
+        "data": [45,75],
+        "backgroundColor": ["#46be8a",  "#1b55e3"],
+        "borderColor": "#fff",
+        "borderWidth": 2,
+        "hoverBorderWidth": 0,
+        "borderAlign": "inner"
+      }
+    ]
+  }
+  

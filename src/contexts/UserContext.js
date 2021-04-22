@@ -20,12 +20,14 @@ const UserProvider = ({ history, children }) => {
     .then(resp => {
       if(resp){
         if(resp.data.current_user){
-          let {customers_count, tracks_count, subscribers_count, active_users_count, current_user} = resp.data
+          let {customers_count, tracks_count, subscribers_count, active_users_count, current_user, monthly_subscribers, yearly_subscribers} = resp.data
           let metric = {
             customers_count,
             tracks_count,
             subscribers_count,
-            active_users_count
+            active_users_count,
+            monthly_subscribers,
+            yearly_subscribers
           }
           // console.log('metric', metric);
           setCurrentUser(current_user)

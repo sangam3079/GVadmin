@@ -7,7 +7,10 @@ import MiniLogs from '../Logs/MiniLogs'
 import CustomerChart from '../Chart/CustomerChart'
 import CustomLayout from '../../components/CustomLayout/CustomLayout'
 import InfoCard from '../../cleanComponents/ChartCard'
+import CustomerGrowthChart from '../../components/Chart/CustomerGrowthChart'
 import WidgetCard from '../../cleanComponents/widgets'
+import WidgetGraph from '../../cleanComponents/Graphs'
+import DoughnutGraph from '../../cleanComponents/Graphs/DoughnutGraph'
 // import BreadCrumb from 'cleanComponents/Breadcrumb/BreadCrumb'
 
 
@@ -31,7 +34,7 @@ const Dashboard = ({ history }) => {
 					<InfoCard title="Customer" amount={metrics.customers_count}/>
 				</div>
 				<div className="col-sm-3">
-					<WidgetCard title="Subscriber" amount={metrics.subscribers_count}/>
+					<InfoCard title="Subscriber" amount={metrics.subscribers_count}/>
 				</div>
 				<div className="col-sm-3">
 					<InfoCard title="Active User" amount={metrics.active_users_count}/>
@@ -44,7 +47,7 @@ const Dashboard = ({ history }) => {
 			</div>
 			<div className="row">
 				<div className="col-lg-12">
-					<MiniTracks />
+					<CustomerGrowthChart />
 				</div>
 			</div>
 			<div className="row">
