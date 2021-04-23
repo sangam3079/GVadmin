@@ -37,10 +37,23 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
   const [dateFilter, setDateFilter] = useState({});
   const [sort, setSort] = useState();
 
+  const token = cookie.getToken();
+
   const [showModal, setShowModal] = useState(false)
   const [selectedUserGroups,setSelectedUserGroups] = useState({});
 
-  const token = cookie.getToken();
+  const onOpenModal = (row) => {
+    console.log(row);
+    setSelectedUserGroups(row);
+    setShowModal(true);
+  }
+
+  const onCloseModal = () => {
+      setShowModal(false);
+      setSelectedUserGroups({selectedCustomer : undefined});
+  }
+
+  
 
   const navigate = () => {
     dispatch(setUserGroupsCampaign({}));
@@ -102,21 +115,12 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
     fetchUserGroupsCampaign();
   }, [keyword, dateFilter, sort, currentPage]);
 
-  const onOpenModal = () => {
-    //console.log(record);
-    //setSelectedCustomer(record);
-    setShowModal(true);
-  }
-
-  const onCloseModal = () => {
-      setShowModal(false);
-      //setSelectedCustomer({selectedCustomer : undefined});
-  }
+  
 
   
   const columns = [
     {
-      title: 'Title',
+      title: 'Tags Title',
     
       dataIndex: 'title',
       key: 'title',
@@ -133,9 +137,9 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
       render : (user_ids) => (
         <span>
           {user_ids.map((user_id) => {
-            let color= user_id.length < 3 ? 'yellow' : 'red'
+            let color= user_id.length < 3 ? 'yellow' : 'green'
             return (
-              <Tag color={color} style={{borderRadius:10}}>
+              <Tag color={color} style={{borderRadius:7}}>
                   {user_id}
               </Tag>
             )
@@ -144,61 +148,27 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
       )
     },
     {
-      title: "users",
-      dataIndex:"users",
-      key:'users',
-      render : (users) => (
-        <span>
-          {users.map((user) => {
-            return (
-              <ul>
-                <div>
-                  User Id: 
-                  <Tag color='green' style={{borderRadius:5}}>
-                    {user.id}
-                  </Tag>
-                </div>
-                <div>
-                  Email : 
-                  <Tag color='pink' style={{borderRadius:7}}>
-                    {user.email}
-                  </Tag>
-                </div>
-                <div>
-                  Name : 
-                  <Tag color='purple' style={{borderRadius:7}}>
-                    {user.full_name}
-                  </Tag>
-                </div>
-                
-                
-              </ul> 
-            )
-          })}
-        </span>
-      )
-    }, 
-    {
       title: 'Created At',
     
       dataIndex: 'created_at',
       key: 'created_at',
     },
-    { /*
-      title : 'User Details',
-      
-      render : () => {
+    { 
+      title : 'Details',
+      dataIndex : 'options',
+      key : 'options',
+      render : (record, row) => {
           return (
             <div>
               <IdcardOutlined 
-                  onClick={ ()=>onOpenModal()  } 
-                  style={{color : '#1890ff'}}
+                  onClick={ ()=>onOpenModal(row)  } 
+                  style={{color : '#1890ff',alignItems:'center'}}
               />
               
             </div>
           );
       }
-    */}      
+    }      
   ] 
 
 
@@ -243,7 +213,7 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
               closable={true}
               onCancel={onCloseModal}
               visible={showModal}
-              width={920}
+              width={750}
               centered={true}
               destroyOnClose={true}
               
