@@ -50,6 +50,7 @@ import Settings from '../../components/Settings';
 import Logs from '../../components/Logs/Logs';
 // import Notifications from '../../components/Notifications/Notifications';
 import Campaign from '../Campaign/Campaign';
+import UserCampaign from 'components/UserCampaign';
 import Downloads from '../../components/Downloads/Download';
 import Playlist from 'components/Playlists';
 import Ritual from '../../components/Rituals';
@@ -70,11 +71,14 @@ import SubscriptionForm from '../Subscriptions/Form';
 import PlaylistForm from '../Playlists/Form';
 import RitualForm from '../Rituals/Form';
 import CampaignForm from '../Campaign/Form';
+import UserCampaignForm from '../UserCampaign/Form';
 
 import TagForm from 'components/Tags/TagForm';
 import TagGroupForm from 'components/Tags/TagGroupForm';
 
-import UserCampaign from 'components/UserCampaign';
+
+
+
 
 function App({ history }) {
   return (
@@ -131,6 +135,8 @@ function App({ history }) {
         <PrivateRoute exact path={RITUALS.NEW} component={RitualForm} />
         <PrivateRoute exact path={CAMPAIGN.EDIT} component={CampaignForm} />
         <PrivateRoute exact path={CAMPAIGN.NEW} component={CampaignForm} />
+        <PrivateRoute exact path={USERCAMPAIGN.EDIT} component={UserCampaignForm} />
+        <PrivateRoute exact path={USERCAMPAIGN.NEW} component={UserCampaignForm} />
         <PrivateRoute exact path={TAGS.EDIT} component={TagForm} />
         <PrivateRoute exact path={TAGS.NEW} component={TagForm} />
         <PrivateRoute exact path={TAGS_GROUP.EDIT} component={TagGroupForm} />
@@ -153,16 +159,20 @@ function App({ history }) {
         <PrivateRoute path={GENRES.INDEX} component={Genres} />
         {/* <PrivateRoute path={NOTIFICATIONS.INDEX} component={Notifications} /> */}
         <PrivateRoute path={CAMPAIGN.INDEX} component={Campaign} />
+        
         <PrivateRoute path={SUBSCRIPTIONS.INDEX} component={Subscriptions} />
         <PrivateRoute path={DOWNLOAD.INDEX} component={Downloads} />
         <PrivateRoute path={PLAYLISTS.INDEX} component={Playlist} />
         <PrivateRoute path={RITUALS.INDEX} component={Ritual} />
         <PrivateRoute path={SLIDER} component={Slider} />
         <PrivateRoute path={SETTINGS} component={Settings} />
-        <PrivateRoute path={ANALYTICTRACKS} component={AnalyticTracks} />
-        <PrivateRoute path={USERCAMPAIGN} component={UserCampaign} />
+        
         <PrivateRoute path={LOGS} component={Logs} />
+        <PrivateRoute path={USERCAMPAIGN} component={UserCampaign} />
         <PrivateRoute path={TAGS} component={Tags} />
+        <PrivateRoute path={ANALYTICTRACKS} component={AnalyticTracks} />
+       
+        
         
         
       </Switch>

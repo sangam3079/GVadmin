@@ -19,8 +19,8 @@ import cookie from 'utils/cookie';
 const token = cookie.getToken();
 const baseUrlCampaign = `${apiEndpoint}/${userGroupsCampaignUrl}`;
 
-/*
-export const newUserGroupsCampaign = ({ body, callback, final }) => {
+
+export const newCampaign = ({ body, callback, final }) => {
   const url = baseUrlCampaign;
   return async (dispatch) => {
     try {
@@ -33,7 +33,7 @@ export const newUserGroupsCampaign = ({ body, callback, final }) => {
 
       if (!!response) {
         console.log('campaing created', response);
-        dispatch(addNewCampaign(response.data));
+        dispatch(addNewUserGroupsCampaign(response.data));
 
         //      callback();
         message.success('Successfully added a campaign');
@@ -58,7 +58,7 @@ export const newUserGroupsCampaign = ({ body, callback, final }) => {
   //     .catch((err) => console.warn(err))
   //     .finally(() => callback());
   // };
-}; */
+}; 
 
 export const getAllUserGroupsCampaign = (obj) => {
   let { params, callback, prevUserGroupsCampaignKeyword } = obj;
@@ -119,20 +119,20 @@ export const getAllUserGroupsCampaign = (obj) => {
     }
   };
 };
- /*
-export const deleteCampaign = ({ id, callback }) => {
-  let url = `${apiEndpoint}/${campaignUrl}/${id}`;
+
+export const deleteUserGroupsCampaign = ({ id, callback }) => {
+  let url = `${apiEndpoint}/${userGroupsCampaignUrl}/${id}`;
   return (dispatch) => {
     postApiCall({ dispatch, method: 'DELETE', url })
       .then((resp) => {
         if (resp !== 0) {
-          dispatch(campaignDelete(id));
+          dispatch(userGroupsCampaignDelete(id));
         }
       })
       .catch((err) => console.log(err))
       .finally(() => callback());
   };
-}; */
+}; 
 
 export const getUserGroupsCampaign = (obj) => {
   let { id, callback } = obj;
@@ -151,9 +151,9 @@ export const getUserGroupsCampaign = (obj) => {
       .finally(() => callback());
   };
 };
- /*
+
 export const updateCampaign = ({ id, body, callback }) => {
-  let url = `${apiEndpoint}/${campaignUrl}/${id}`;
+  let url = `${apiEndpoint}/${userGroupsCampaignUrl}/${id}`;
   //   let url = `https://api-stage.goodvibesofficial.com:4443/admin/v2/campaigns/64`;
   console.log(url);
   console.log('This update dispatch is working');
@@ -169,7 +169,7 @@ export const updateCampaign = ({ id, body, callback }) => {
       .then((resp) => {
         console.log('campaign response data', resp);
         if (resp !== 0) {
-          dispatch(campaignUpdate({ id, payload: resp.data }));
+          dispatch(userGroupsCampaignUpdate({ id, payload: resp.data }));
         } else {
           // message.error('Sorry couldnot update notification. Something went wrong')
         }
@@ -177,7 +177,7 @@ export const updateCampaign = ({ id, body, callback }) => {
       .catch((err) => console.log(err))
       .finally(() => callback());
   };
-};  */
+};  
 
 // export const fetchTemplatePreview= async (id)=>{
 

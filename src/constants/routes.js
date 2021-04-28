@@ -66,6 +66,16 @@ export const CAMPAIGN = {
   EDIT: `${CAMPAIGN_PATH}/:id/edit`,
 };
 
+const USERCAMPAIGN_PATH = '/UserGroups';
+export const USERCAMPAIGN = {
+  INDEX: USERCAMPAIGN_PATH,
+  NEW: `${USERCAMPAIGN_PATH}/new`,
+  VIEW: `${USERCAMPAIGN_PATH}/:id`,
+  EDIT: `${USERCAMPAIGN_PATH}/:id/edit`,
+};
+
+
+
 const PLAYLIST_PATH = '/playlists';
 export const PLAYLISTS = {
   INDEX: PLAYLIST_PATH,
@@ -151,4 +161,5 @@ export const SLIDER = '/slider';
 
 export const ANALYTICTRACKS = '/analytic-tracks';
 
-export const USERCAMPAIGN = '/userCampaign';
+//export const USERCAMPAIGN = '/UserGroups';
+

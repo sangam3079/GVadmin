@@ -392,11 +392,11 @@ const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
                 dispatch(setCategoryKeyword(undefined));
               }} */
             >
-              <Link to='/userCampaign'>
+              <Link to='/UserGroups'>
                 <BellOutlined
                   className={`${styles.icon} icon-collapsed-hidden`}
                 />
-                <span>User Campaign</span>
+                <span>User Groups</span>
               </Link>
             </Menu.Item>
           </SubMenu>

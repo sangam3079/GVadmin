@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import CustomLayout from '../CustomLayout/CustomLayout'
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { getAllUserGroupsCampaign, } from 'services/userCampaign';
+import { getAllUserGroupsCampaign, deleteUserGroupsCampaign } from 'services/userCampaign';
 import AntTable from 'cleanComponents/Table/Table';
 import Header from 'components/Header/Header';
 import { Button, Divider, Modal, Tag, Spin, Alert } from 'antd';
@@ -57,7 +57,7 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
 
   const navigate = () => {
     dispatch(setUserGroupsCampaign({}));
-    history.push('/userCampaign');
+    history.push('/UserGroups/new');
   };
 
   useEffect(() => {
@@ -115,12 +115,41 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
     fetchUserGroupsCampaign();
   }, [keyword, dateFilter, sort, currentPage]);
 
+  const handleEditCampaign = (id, obj) => {
+    dispatch(setUserGroupsCampaign(obj));
+    history.push(`/UserGroups/${id}/edit`);
+  }; 
+
+  function showDeleteConfirm(id) {
+    confirm({
+      title: 'Are you sure to delete this notification?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'This action cannot be undone',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        deleteThisCampaign(id);
+      },
+      onCancel() {},
+    });
+  }
+
+  const deleteThisCampaign = (id) => {
+    setFetching(true);
+    dispatch(deleteUserGroupsCampaign({ id, callback: handleDeleteCallback }));
+  };
+
+  const handleDeleteCallback = () => {
+    setFetching(false);
+  };
+
   
 
   
   const columns = [
     {
-      title: 'Tags Title',
+      title: 'Groups Title',
     
       dataIndex: 'title',
       key: 'title',
@@ -137,9 +166,9 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
       render : (user_ids) => (
         <span>
           {user_ids.map((user_id) => {
-            let color= user_id.length < 3 ? 'yellow' : 'green'
+            
             return (
-              <Tag color={color} style={{borderRadius:7}}>
+              <Tag color='green' style={{borderRadius:7}}>
                   {user_id}
               </Tag>
             )
@@ -154,12 +183,20 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
       key: 'created_at',
     },
     { 
-      title : 'Details',
+      title : 'Options',
       dataIndex : 'options',
       key : 'options',
       render : (record, row) => {
           return (
-            <div>
+            <div > 
+              <Link to='#' onClick={() => handleEditCampaign(row.id, row)}>
+                <EditOutlined className='text-primary' />
+              </Link> 
+              <Divider type='vertical' /> 
+              <Link to='#' onClick={() => showDeleteConfirm(row.id)}>
+                <DeleteOutlined className='text-danger' />
+              </Link> 
+              <Divider type='vertical' />
               <IdcardOutlined 
                   onClick={ ()=>onOpenModal(row)  } 
                   style={{color : '#1890ff',alignItems:'center'}}
@@ -190,9 +227,10 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
                 <span className='px-2'>
                   <PlusCircleFilled />
                 </span>
-                New UserGroupCampaign
+                New Groups
               </Button>
             }
+            
           />
            <div style={{ width: '100%' }} className='card-body'>
             <AntTable
@@ -209,7 +247,7 @@ const UserGroupsCampaign =({history,campaignData,dispatch,total,currentPage,keyw
               //scroll={{ x: 1320 }}
             />
             <Modal
-              title="User Groups Campaign"
+              title="User Groups Details"
               closable={true}
               onCancel={onCloseModal}
               visible={showModal}
