@@ -161,5 +161,5 @@ export const SLIDER = '/slider';
 
 export const ANALYTICTRACKS = '/analytic-tracks';
 
-//export const USERCAMPAIGN = '/UserGroups';
+
 

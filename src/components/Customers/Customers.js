@@ -1,11 +1,12 @@
+
 import React, {useState, useEffect} from 'react'
-import {Table, Button, Divider, Modal, Switch, Drawer} from 'antd';
+import {Table, Button, Divider, Modal, Switch, Drawer, Input} from 'antd';
 import Spinner from '../../components/Spinner/Spinner'
 import Header from '../../components/Header/Header'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import CustomLayout from '../../components/CustomLayout/CustomLayout'
-import {DownloadOutlined, DeleteOutlined, ExclamationCircleOutlined, EditOutlined, AndroidFilled, AppleFilled, IdcardOutlined, PlusCircleFilled  } from '@ant-design/icons';
+import {SearchOutlined, DownloadOutlined, DeleteOutlined, ExclamationCircleOutlined, EditOutlined, AndroidFilled, AppleFilled, IdcardOutlined, PlusCircleFilled  } from '@ant-design/icons';
 import Moment from 'moment'
 import { deleteCustomer, getAllCustomer, updateCustomer, exportCustomerData } from 'services/customers';
 import {setCustomer, setCustomerCurrentpage, setCustomerKeyword} from 'store/actions/Customer/CustomerAction';
@@ -13,6 +14,7 @@ import AntTable from 'cleanComponents/Table/Table'
 import CustomerDetails from './CustomerDetails'
 import Can from 'config/can'
 import { getSorterObject } from 'utils/helpers'
+import CustomerDashboard from './CustomerDashboard';
 
 const Customers = React.memo(({history, dispatch, data, total, currentPage, keyword}) => {
     const { confirm } = Modal;
@@ -102,6 +104,8 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
         }
         dispatch(exportCustomerData(params));
     }
+
+    
 
     
     const columns = [
@@ -234,7 +238,7 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
             let newSort = getSorterObject(sorter);
             setSort(newSort)
         }
-
+        
         if(filter){
             let obj;
             Object.keys(filter).forEach(key => {
@@ -246,8 +250,8 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
                     obj = new_obj
                 }
             })
-            setFilter(obj);
-        }
+            setFilter(obj); 
+        } 
     }
 
     const fetchCustomers = (pageParam, filterParam, sorterParam) => {
@@ -311,10 +315,13 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
         setDateFilter(value);
     }
 
+    
+    
+
     useEffect(() => {
         // console.log('i run when keyword datefilter sort filter changes', keyword, dateFilter, sort, filter);
         fetchCustomers();
-    },[keyword, dateFilter, sort, filter, currentPage])
+    },[keyword, dateFilter, sort,  filter, currentPage])
 
     const renderConditionally = () => {
         if(loading){
@@ -326,7 +333,8 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
         }else{
             return (
                 <CustomLayout sidebarSelectionKey="customers">
-                    <div style={{width : '100%'}} className="card">
+
+                    <div style={{marginTop:25, marginBottom:20}}>  
                         <Header 
                             // title="Customers" 
                             // subtitle="List of all customers"
@@ -342,7 +350,17 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
                                 }
                             </Can>
                             } 
-                        />
+                        />  
+                    </div>      
+
+                        <div className="a">
+                            <CustomerDashboard />
+                        </div>  
+                    
+                    <div style={{width : '100%'}} className="card">
+                       
+                        
+                        
                         <div className="card-body drawer-customPadding">
                             
                             <AntTable 
@@ -392,4 +410,7 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(withRouter(Customers))
+export default connect(mapStateToProps)(withRouter(Customers)) 
+
+
+

@@ -87,21 +87,13 @@ const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
     dispatch(setCollapsed(!collapsed));
   };
 
-  const analyticMenu = (
-    <Menu>
-      <Menu.Item key="0">
-        <Link to="/analytic-tracks">Tracks</Link>
-      </Menu.Item>
-      <Menu.Item key="1">
-        <Link to="/tags">customer</Link>
-      </Menu.Item>
-    </Menu>
-  );
+  
 
   const { SubMenu } = Menu;
 
   // submenu keys of first level
   const rootSubmenuKeys = ['campaign', 'usercampaign', ];
+  
 
   const [openKeys, setOpenKeys] = useState(['campaign']);
 
@@ -360,14 +352,8 @@ const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
               <span>Activity Logs</span>
             </Link>
           </Menu.Item>
-          {/*
-          <Menu.Item key='analytics'>
-              <Dropdown overlay={analyticMenu} trigger={['click']} placement="bottomRight" arrow>
-                <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                  Analytics <AccountBookOutlined className={`${styles.icon} icon-collapsed-hidden`}/>
-                </a>
-              </Dropdown>  
-          </Menu.Item> */}
+          
+          
           <SubMenu key="campaign" title="Campaign">
             <Menu.Item 
               key="campaign"
@@ -399,6 +385,16 @@ const Menus = ({ dispatch, isMobileView, collapsed, selectionKey }) => {
                 <span>User Groups</span>
               </Link>
             </Menu.Item>
+          </SubMenu>
+          <SubMenu key='analytics' title='Analytics'>
+            <Menu.Item>
+              <Link to='/analytic-tracks'>
+                <CustomerServiceOutlined
+                  className={`${styles.icon} icon-collapsed-hidden`}
+                />
+                <span>Tracks Analytics</span>
+              </Link>
+            </Menu.Item>  
           </SubMenu>
         </Menu>
       </Scrollbars>

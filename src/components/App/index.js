@@ -133,14 +133,16 @@ function App({ history }) {
         <PrivateRoute exact path={PLAYLISTS.NEW} component={PlaylistForm} />
         <PrivateRoute exact path={RITUALS.EDIT} component={RitualForm} />
         <PrivateRoute exact path={RITUALS.NEW} component={RitualForm} />
-        <PrivateRoute exact path={CAMPAIGN.EDIT} component={CampaignForm} />
-        <PrivateRoute exact path={CAMPAIGN.NEW} component={CampaignForm} />
-        <PrivateRoute exact path={USERCAMPAIGN.EDIT} component={UserCampaignForm} />
-        <PrivateRoute exact path={USERCAMPAIGN.NEW} component={UserCampaignForm} />
+        
         <PrivateRoute exact path={TAGS.EDIT} component={TagForm} />
         <PrivateRoute exact path={TAGS.NEW} component={TagForm} />
         <PrivateRoute exact path={TAGS_GROUP.EDIT} component={TagGroupForm} />
         <PrivateRoute exact path={TAGS_GROUP.NEW} component={TagGroupForm} />
+
+        <PrivateRoute exact path={CAMPAIGN.EDIT} component={CampaignForm} />
+        <PrivateRoute exact path={CAMPAIGN.NEW} component={CampaignForm} />
+        <PrivateRoute exact path={USERCAMPAIGN.EDIT} component={UserCampaignForm} />
+        <PrivateRoute exact path={USERCAMPAIGN.NEW} component={UserCampaignForm} />
 
         <PrivateRoute path={DASHBOARD} component={Dashboard} />
         
@@ -166,11 +168,16 @@ function App({ history }) {
         <PrivateRoute path={RITUALS.INDEX} component={Ritual} />
         <PrivateRoute path={SLIDER} component={Slider} />
         <PrivateRoute path={SETTINGS} component={Settings} />
-        
-        <PrivateRoute path={LOGS} component={Logs} />
-        <PrivateRoute path={USERCAMPAIGN} component={UserCampaign} />
-        <PrivateRoute path={TAGS} component={Tags} />
         <PrivateRoute path={ANALYTICTRACKS} component={AnalyticTracks} />
+        <PrivateRoute path={LOGS} component={Logs} />
+
+        <PrivateRoute path={USERCAMPAIGN} component={UserCampaign} />
+        
+        <PrivateRoute path={TAGS} component={Tags} />
+        
+        
+        
+        
        
         
         

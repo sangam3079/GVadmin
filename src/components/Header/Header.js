@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {Input, DatePicker, Select} from 'antd'
+import moment from 'moment';
 import {debounce} from 'lodash'
 import {connect} from 'react-redux'
-import { EyeFilled, EyeOutlined } from '@ant-design/icons'
+import { EyeFilled, EyeOutlined ,AndroidFilled, AppleFilled} from '@ant-design/icons'
 import CustomSelect from '../Notifications/CustomSelect'
 import { getApiCall, urlWithParams } from 'services/url'
 import {apiEndpoint} from 'services/constants'
@@ -19,7 +20,8 @@ const Header = ({
     categoryData,
     extraFilter,
     dispatch,
-    keywordValue
+    keywordValue,
+    
 }) => {
     // console.log(keywordValue)
     const [categoryValue, setCategoryValue] = useState()
@@ -27,6 +29,10 @@ const Header = ({
     const [genreValue, setGenreValue] = useState()
     const [genreData, setGenreData] = useState([])
     const [fetchingGenre, setFetchingGenre] = useState(false)
+
+   
+
+    
 
     useEffect(()=>{
         if(typeof handleGenreChange === 'function'){
@@ -56,7 +62,7 @@ const Header = ({
     const onGenreChange = value => {
         handleGenreChange(value);
     }
-
+    
     const onCategoryChange = value => {
         handleCategoryChange(value)
     }
@@ -76,6 +82,8 @@ const Header = ({
         .catch(err => console.log(err))
         .finally(()=>setFetchingGenre(false))
     }
+
+    
 
     // console.log(autoRefresh);
 
@@ -106,6 +114,7 @@ const Header = ({
                                                         placeholder="Search"
                                                         defaultValue={keywordValue}
                                                         allowClear
+                                                        
                                                         /> 
                                                 </div>
                                                 : <></>
@@ -114,10 +123,25 @@ const Header = ({
                                         {
                                             typeof handleDateFilter === 'function' ? 
                                             <div 
-                                                className="px-3" 
+                                                className="px-3"
                                                 // style={{width : '50%'}}
+                                                
                                             >
-                                                <RangePicker onChange={dateChange} style={handleCategoryChange && handleGenreChange ? {width : 100} : {}}/> 
+                                                <RangePicker
+                                                    //defaultValue={[moment().startOf('month'), moment().endOf('month')]}
+                                                    onChange={dateChange}
+                                                    style={handleCategoryChange && handleGenreChange ? {width : 100, } : { borderRadius:2}}
+                                                    ranges={{
+                                                        'Today': [moment().startOf('day'), moment().endOf('day')],
+                                                        'This Week' : [moment().startOf('week'), moment().endOf('week')],
+                                                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                                        'This Year': [moment().startOf('year'), moment().endOf('year')],
+                                                      }}
+
+                                                    popupStyle={{}}
+                                                    
+
+                                                /> 
                                             </div>
                                             : <></>
                                         }
@@ -157,6 +181,7 @@ const Header = ({
                                                     })}
                                                 </Select></div> : <></>
                                         }
+
                                 </div>
                                 <div className="d-flex justify-content-end align-items-center">
                                     {autoRefresh ?  autoRefresh === 'active' ? <EyeFilled style={{fontSize : 18}} onClick={toggleAutoRefresh} title="Auto Refresh enabled" /> : <EyeOutlined style={{fontSize : 18}} onClick={toggleAutoRefresh} title="Auto Refresh disabled" /> : ''}

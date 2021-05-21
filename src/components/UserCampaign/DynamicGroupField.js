@@ -21,7 +21,7 @@ const DynamicField = (props) => {
   const { wait_options, sequences } = props;
 
   // const [deliveryTimeData, setDeliveryTimeData]=useState(undefined);
-/*
+
   const [deliveryTimeType, setDeliveryTimeType] = useState([]);
 
   const setDeliveryTime = (sequences) => {
@@ -52,7 +52,7 @@ const DynamicField = (props) => {
     new_deliveryTimeType[index] = event.target.value;
 
     setDeliveryTimeType(new_deliveryTimeType);
-  }; */
+  }; 
 
   return (
     <Form.List name='sequences'>
@@ -121,7 +121,7 @@ const DynamicField = (props) => {
 
             <Form.Item>
               <Button
-                // type="primary"
+                type="primary"
                 // type="dashed"
                 size='medium'
                 shape='round'

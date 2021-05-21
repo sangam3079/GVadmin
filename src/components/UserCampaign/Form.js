@@ -808,6 +808,7 @@ const UserGroupsCampaignForm = (props) => {
                     className='w-100'
                     name='title'
                     label='Groups Title'
+                    rules={[{ required: true, message: 'title is required' }]}
                 >
                     <Input 
                         placeholder='Enter the Group/campaign title'
@@ -817,8 +818,10 @@ const UserGroupsCampaignForm = (props) => {
               </Col>
 
               <Col span={12} offset={1}>
-                <Form.Item label='Select a Date' name='select a date'>
-                    <DatePicker onChange={onChange} />
+                <Form.Item 
+                  label='Select a Date' 
+                  name='select a date'>
+                    <DatePicker onChange={onChange}  />
                 </Form.Item>
               </Col>
             </Row>
