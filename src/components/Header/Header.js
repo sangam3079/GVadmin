@@ -14,6 +14,7 @@ const Header = ({
     button, 
     handleKeywordFilter, 
     handleDateFilter, 
+    handleDeviceFilter,
     toggleAutoRefresh,
     handleCategoryChange,
     handleGenreChange,
@@ -57,6 +58,9 @@ const Header = ({
         }else{
             handleDateFilter({})
         }
+    }
+    const deviceChange = value => {
+        handleDeviceFilter(value)
     }
 
     const onGenreChange = value => {
@@ -136,11 +140,7 @@ const Header = ({
                                                         'This Week' : [moment().startOf('week'), moment().endOf('week')],
                                                         'This Month': [moment().startOf('month'), moment().endOf('month')],
                                                         'This Year': [moment().startOf('year'), moment().endOf('year')],
-                                                      }}
-
-                                                    popupStyle={{}}
-                                                    
-
+                                                    }}
                                                 /> 
                                             </div>
                                             : <></>
@@ -175,11 +175,25 @@ const Header = ({
                                                     labelInValue
                                                     placeholder="Category Filter"
                                                     allowClear
+                                                    
                                                 >
                                                     {categoryData.map(category => {
                                                         return <Option key={category.id}>{category.name}</Option>
                                                     })}
                                                 </Select></div> : <></>
+                                        }
+
+                                        {
+                                            typeof handleDeviceFilter === 'function' ?
+                                                <Select 
+                                                    placeholder="device"
+                                                    onChange={deviceChange}
+                                                >
+                                                    <Option value='ios'>ios</Option>
+                                                    <Option value='android'>android</Option>
+                                                </Select>
+                                                    
+                                             : <></>
                                         }
 
                                 </div>

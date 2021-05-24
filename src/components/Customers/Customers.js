@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from 'react'
-import {Table, Button, Divider, Modal, Switch, Drawer, Input} from 'antd';
+import {Table, Button, Divider, Modal, Switch, Drawer, Input, Select} from 'antd';
 import Spinner from '../../components/Spinner/Spinner'
 import Header from '../../components/Header/Header'
 import {withRouter} from 'react-router-dom'
@@ -9,25 +9,35 @@ import CustomLayout from '../../components/CustomLayout/CustomLayout'
 import {SearchOutlined, DownloadOutlined, DeleteOutlined, ExclamationCircleOutlined, EditOutlined, AndroidFilled, AppleFilled, IdcardOutlined, PlusCircleFilled  } from '@ant-design/icons';
 import Moment from 'moment'
 import { deleteCustomer, getAllCustomer, updateCustomer, exportCustomerData } from 'services/customers';
-import {setCustomer, setCustomerCurrentpage, setCustomerKeyword} from 'store/actions/Customer/CustomerAction';
+import {setCustomer, setCustomerCurrentpage, setCustomerKeyword, setCustomerDevice} from 'store/actions/Customer/CustomerAction';
 import AntTable from 'cleanComponents/Table/Table'
 import CustomerDetails from './CustomerDetails'
 import Can from 'config/can'
 import { getSorterObject } from 'utils/helpers'
 import CustomerDashboard from './CustomerDashboard';
+import { isObjectType } from 'graphql';
 
-const Customers = React.memo(({history, dispatch, data, total, currentPage, keyword}) => {
+const { Option } = Select;
+
+
+
+
+
+
+const Customers = React.memo(({history, dispatch, data, total, currentPage, keyword, device }) => {
     const { confirm } = Modal;
     let [switchLoading, setSwitchLoading] = useState(false);
     let [fetching, setFetching] = useState(false);
     let [loading, setLoading] = useState(false);
     let [prevSearchKeyword, setPrevSearchKeyword] = useState(undefined);
     let [dateFilter, setDateFilter] = useState();
+   // let [device, setDevice] = useState();
     let [sort, setSort] = useState()
     let [filter, setFilter] = useState()
     const [showModal, setShowModal] = useState(false)
     const [selectedCustomer,setSelectedCustomer] =useState({})
-    
+
+
     // let [currentPage, setCurrentPage] = useState(1);
     
     const deleteUser = (id) => {
@@ -105,6 +115,7 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
         dispatch(exportCustomerData(params));
     }
 
+
     
 
     
@@ -150,18 +161,21 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
                 }
             }
         },
-        {
+        { /*
             title : 'Device',
-            dataIndex : 'device',
+            device:'device',
             key : 'device',
             filters : [
                 {text : 'iOS', value: 'ios'},
                 {text : 'Android', value : 'android'}
             ],
             filterMultiple: false,
+            
             render : (device) => {
                 return <div style={{display : 'flex', justifyContent :'center'}}>{device === 'android' ? <AndroidFilled /> : device === 'ios' ? <AppleFilled /> : <small>-</small>}</div>
-            }
+            } */
+           
+            
         },
         {
             title : `Created Date`,
@@ -262,6 +276,8 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
             keyword,
             date_from : dateFilter ? dateFilter.date_from : undefined,
             date_to : dateFilter ? dateFilter.date_to : undefined,
+            device,
+            
             ...filter
         }
 
@@ -315,13 +331,19 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
         setDateFilter(value);
     }
 
+    const handleDeviceFilter = value => {
+        // setCurrentPage(1)
+        dispatch(setCustomerDevice(value))
+    }
+
+
     
     
 
     useEffect(() => {
         // console.log('i run when keyword datefilter sort filter changes', keyword, dateFilter, sort, filter);
         fetchCustomers();
-    },[keyword, dateFilter, sort,  filter, currentPage])
+    },[keyword, dateFilter, device, sort,  filter, currentPage])
 
     const renderConditionally = () => {
         if(loading){
@@ -333,14 +355,29 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
         }else{
             return (
                 <CustomLayout sidebarSelectionKey="customers">
+                    <div style={{background:'darkgrey', width:120, borderRadius:8, marginLeft:865 }}>
+                        <Select 
+                            placeholder={'ios/android'} 
+                            onChange={handleDeviceFilter} 
+                            style={{ width: 115 }} 
+                            bordered={false}
+                            
+                        >
+                            <Option value='ios'> <AppleFilled/> IOS</Option>
+                            <Option value='android'> <AndroidFilled/>  Android</Option>
+                        </Select>
+                    </div>
+                    
 
                     <div style={{marginTop:25, marginBottom:20}}>  
+
                         <Header 
                             // title="Customers" 
                             // subtitle="List of all customers"
                             handleDateFilter={handleDateFilter}
                             handleKeywordFilter={handlekeywordFilter}
                             keywordValue={keyword}
+                            
                             button={
                             <Can I="create" a="customer" passThrough>
                                 {
@@ -351,11 +388,14 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
                             </Can>
                             } 
                         />  
-                    </div>      
-
-                        <div className="a">
-                            <CustomerDashboard />
-                        </div>  
+                    </div>  
+                   
+                      
+                       
+                    <div className="a">
+                        
+                        <CustomerDashboard />
+                    </div>  
                     
                     <div style={{width : '100%'}} className="card">
                        
@@ -369,7 +409,7 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
                                 pagination={{pageSize : 10, total:total,  showSizeChanger : false, current : currentPage}}
                                 onChange={handleTableChange}
                                 loading={fetching}
-                            />
+                            /> 
                             <Modal
                                 title="Customer Information"
                                 closable={true}
@@ -406,7 +446,8 @@ const mapStateToProps = state => {
         data : state.Customer.data,
         total : state.Customer.total,
         currentPage : state.Customer.currentPage,
-        keyword : state.Customer.keyword
+        keyword : state.Customer.keyword,
+        device : state.Customer.device
     }
 }
 

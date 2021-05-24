@@ -5,6 +5,7 @@ export const NEW_CUSTOMER = 'NEW_CUSTOMER'
 export const DELETE_CUSTOMER = 'DELETE_CUSTOMER'
 export const UPDATE_CUSTOMER = 'UPDATE_CUSTOMER'
 export const SET_CUSTOMER_KEYWORD = 'SET_CUSTOMER_KEYWORD'
+export const SET_CUSTOMER_DEVICE = 'SET_CUSTOMER_DEVICE'
 export const SET_CUSTOMER_CURRENTPAGE = 'SET_CUSTOMER_CURRENTPAGE'
 
 export function setData(payload){
@@ -60,6 +61,13 @@ export function setCustomerKeyword(payload){
 export function setCustomerCurrentpage(payload){
     return {
         type : SET_CUSTOMER_CURRENTPAGE,
+        payload
+    }
+}
+
+export function setCustomerDevice(payload){
+    return {
+        type : SET_CUSTOMER_DEVICE,
         payload
     }
 }

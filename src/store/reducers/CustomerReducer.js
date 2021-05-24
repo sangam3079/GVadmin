@@ -6,7 +6,8 @@ const initialState = {
     total : undefined,
     totalPage : undefined,
     currentPage : 1,
-    keyword : undefined
+    keyword : undefined,
+    device : undefined
 }
 
 export default function customerReducer(state = initialState, action){
@@ -75,6 +76,11 @@ export default function customerReducer(state = initialState, action){
                 ...state,
                 keyword : action.payload
             }
+        case actions.SET_CUSTOMER_DEVICE:
+            return {
+                ...state,
+                device : action.payload
+            }    
         default:
             return state
     }
