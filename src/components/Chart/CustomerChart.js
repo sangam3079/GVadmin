@@ -70,7 +70,7 @@ const CustomerChart = ({ data, dispatch }) => {
 						data={growth}
 						options ={{seriesBarDistance : 10}} 
 						type="Bar"
-						className="chart-area height-300 mt-4 chartist"
+						className="chart-area height-400 mt-4 chartist"
 					/>
 				</div>
 			</div>

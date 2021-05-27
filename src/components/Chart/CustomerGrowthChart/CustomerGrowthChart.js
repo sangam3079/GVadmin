@@ -30,10 +30,10 @@ const CustomerChart = ({ data, dispatch }) => {
 
     const options = {
         chartPadding: {
-          right: 40,
-          left: 5,
-          top: 0,
-          bottom: 15,
+          right: 30,
+          left: 0,
+          top: 50,
+          bottom: 5,
         },
         fullWidth: true,
         showPoint: true,
@@ -46,7 +46,7 @@ const CustomerChart = ({ data, dispatch }) => {
         axisX: {
           showGrid: false,
           showLabel: true,
-          offset: 10,
+          offset: 20,
         },
         
         showArea: false,
@@ -92,13 +92,13 @@ const CustomerChart = ({ data, dispatch }) => {
 	if (loading) return <div>Loading...</div>
 	return (
         <div className="col-lg-12">
-            <div className={`card ${style.card}`}>
+            <div /*className={`card ${style.card}`} */>
                 <ChartistGraph
                     data={growth}
                 // options ={{seriesBarDistance : 10}} 
                     options={options}
                     type="Line"
-                    className="height-400 ct-hidden-points"
+                    className="height-300 ct-hidden-points"
                     //className="chart-area height-300 mt-4 chartist"
                 />
             </div>

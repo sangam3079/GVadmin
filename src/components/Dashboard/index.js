@@ -37,19 +37,27 @@ const Dashboard = ({ history }) => {
 					<InfoCard title="Subscriber" amount={metrics.subscribers_count}/>
 				</div>
 				<div className="col-sm-3">
-					<InfoCard title="Active User" amount={metrics.active_users_count}/>
+					<InfoCard title="Active User" amount={metrics.active_users_count ? metrics.active_users_count : '0'}/>
 				</div>
 			</div>
 			<div className="row">
-				<div className="col-lg-12">
-					<MiniCustomers />
-				</div>
-			</div>
-			<div className="row">
-				<div className="col-lg-12">
+			    <div className="col-lg-8">
 					<CustomerGrowthChart />
 				</div>
+				<div className="col-lg-4">
+					<MiniTracks />
+				</div>
+				
 			</div>
+			<div className='row'>
+			    <div className="col-lg-8">
+					<MiniCustomers />
+				</div>
+				<div className="col-lg-4">
+					<MiniLogs />
+				</div>
+			</div>
+			{/*
 			<div className="row">
 				<div className="col-lg-6">
 					<MiniLogs />
@@ -57,7 +65,7 @@ const Dashboard = ({ history }) => {
 				<div className="col-lg-6">
 					<CustomerChart />
 				</div>
-			</div>
+			</div> */}
 		</CustomLayout>
 		</>
 	)

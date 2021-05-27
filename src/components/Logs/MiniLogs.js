@@ -13,7 +13,7 @@ const MiniLogs = ({ history, title, dispatch,data }) => {
 	const fetchLogs = () => {
 		let params = {
 			page : 1,
-			per_page : 10,
+			per_page : 5,
 			filter : {},
 			sort : {}
 		}

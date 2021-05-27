@@ -137,7 +137,8 @@ const Header = ({
                                                     style={handleCategoryChange && handleGenreChange ? {width : 100, } : { borderRadius:2}}
                                                     ranges={{
                                                         'Today': [moment().startOf('day'), moment().endOf('day')],
-                                                        'This Week' : [moment().startOf('week'), moment().endOf('week')],
+                                                        'Yesterday' : [moment().startOf('day').subtract(1,'days'), moment().endOf('day').subtract(1,'days')],
+                                                        'Last Week' : [moment().startOf('day').subtract(7,'days'), moment().endOf('day')],
                                                         'This Month': [moment().startOf('month'), moment().endOf('month')],
                                                         'This Year': [moment().startOf('year'), moment().endOf('year')],
                                                     }}
@@ -185,13 +186,18 @@ const Header = ({
 
                                         {
                                             typeof handleDeviceFilter === 'function' ?
+                                            <div style={{background:'darkgrey', width:115, borderRadius:8, }}>
                                                 <Select 
-                                                    placeholder="device"
-                                                    onChange={deviceChange}
+                                                    placeholder={'ios/android'} 
+                                                    onChange={deviceChange} 
+                                                    style={{ width: 115 }} 
+                                                    bordered={false}
+                                                    
                                                 >
-                                                    <Option value='ios'>ios</Option>
-                                                    <Option value='android'>android</Option>
+                                                    <Option value='ios'> <AppleFilled/> IOS</Option>
+                                                    <Option value='android'> <AndroidFilled/>  Android</Option>
                                                 </Select>
+                                            </div> 
                                                     
                                              : <></>
                                         }

@@ -27,17 +27,18 @@ const MiniCustomers = ({ history, title, dispatch}) => {
 			title : 'Plan',
 			dataIndex : 'plan'
 		},
+		
 		{
 			title : 'Device',
 			dataIndex : 'device',
 			render : (device) => {
                 return <div style={{display : 'flex', justifyContent :'center'}}>{device === 'android' ? <AndroidFilled /> : device === 'ios' ? <AppleFilled /> : <small>-</small>}</div>
             }
-		},
+		},/*
 		{
 			title : 'Created Date',
 			dataIndex : 'created_at'
-		},
+		},  */
 		{
 			title : 'Last Active',
 			dataIndex : 'status',
@@ -52,6 +53,7 @@ const MiniCustomers = ({ history, title, dispatch}) => {
 				return last_login
 			}
 		},
+		/*
 		{
 			title : 'Status',
 			dataIndex : 'active',
@@ -65,8 +67,8 @@ const MiniCustomers = ({ history, title, dispatch}) => {
 					//     />
 					<p>{active ? 'Active' : 'Inactive'}</p>
                 )
-            }
-		},
+            } 
+		},  */
 	]
 
 	useEffect(() => {

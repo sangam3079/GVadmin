@@ -13,17 +13,18 @@ const MiniTracks = ({ history, title, data,currentPage, total, dispatch }) => {
 
 	const columns = [
 		{
-			title : 'Title',
+			title : 'Tracks Title',
 			dataIndex : 'name'
-		},
+		}, 
 		{
 			title : 'Play Count',
 			dataIndex : 'play_count'
 		},
+		/*
 		{
 			title : 'Duration',
 			dataIndex : 'duration'
-		}
+		} */
 	]
 
 
@@ -36,7 +37,7 @@ const MiniTracks = ({ history, title, data,currentPage, total, dispatch }) => {
 
 	const fetchPopularTracks = (pagination) => {
 		let params = {
-			per_page : 6,
+			per_page : 4,
 			page : pagination || 1,
 			filter : {},
 			sort : {}
@@ -79,14 +80,17 @@ const MiniTracks = ({ history, title, data,currentPage, total, dispatch }) => {
 								<span>List of popular tracks</span>
 							</div>
 						</div>
-						<div className="card-body">
+						<div>
 							<AntTable 
-								className="utils_scrollTable"
-								pagination={{pageSize : 6, total : total, current : currentPage, showSizeChanger : false}}
+								//className="utils_scrollTable"
+								//pagination={{pageSize : 6, total : total, current : currentPage, showSizeChanger : false}}
 								dataSource={miniData}
 								columns={columns}
 								loading={fetching}
 								onChange={handleTableChange}
+								//showHeader={false}
+								pagination={false}
+								borderd={true}
 							/>
 						</div>
 					</div>

@@ -355,28 +355,14 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
         }else{
             return (
                 <CustomLayout sidebarSelectionKey="customers">
-                    <div style={{background:'darkgrey', width:120, borderRadius:8, marginLeft:865 }}>
-                        <Select 
-                            placeholder={'ios/android'} 
-                            onChange={handleDeviceFilter} 
-                            style={{ width: 115 }} 
-                            bordered={false}
-                            
-                        >
-                            <Option value='ios'> <AppleFilled/> IOS</Option>
-                            <Option value='android'> <AndroidFilled/>  Android</Option>
-                        </Select>
-                    </div>
-                    
-
                     <div style={{marginTop:25, marginBottom:20}}>  
-
                         <Header 
                             // title="Customers" 
                             // subtitle="List of all customers"
                             handleDateFilter={handleDateFilter}
                             handleKeywordFilter={handlekeywordFilter}
                             keywordValue={keyword}
+                            handleDeviceFilter={handleDeviceFilter}
                             
                             button={
                             <Can I="create" a="customer" passThrough>
@@ -388,14 +374,17 @@ const Customers = React.memo(({history, dispatch, data, total, currentPage, keyw
                             </Can>
                             } 
                         />  
-                    </div>  
+                    </div> 
+
+                    <div style={{marginTop:15, marginBottom:5}}>
+                        
+                        <CustomerDashboard />
+                    </div> 
+                    
                    
                       
                        
-                    <div className="a">
-                        
-                        <CustomerDashboard />
-                    </div>  
+                     
                     
                     <div style={{width : '100%'}} className="card">
                        
